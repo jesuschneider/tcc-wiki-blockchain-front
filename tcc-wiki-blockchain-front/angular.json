@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "blockpedia-frontent": {
+    "tcc-wiki-blockchain-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/blockpedia-frontent",
+            "outputPath": "dist/tcc-wiki-blockchain-front",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "blockpedia-frontent:build:production"
+              "buildTarget": "tcc-wiki-blockchain-front:build:production"
             },
             "development": {
-              "buildTarget": "blockpedia-frontent:build:development"
+              "buildTarget": "tcc-wiki-blockchain-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "blockpedia-frontent:build"
+            "buildTarget": "tcc-wiki-blockchain-front:build"
           }
         },
         "test": {

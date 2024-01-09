@@ -1,5 +1,5 @@
 {
-  "name": "blockpedia-frontent",
+  "name": "tcc-wiki-blockchain-front",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:blockpedia-frontent": "node dist/blockpedia-frontent/server/server.mjs"
+    "serve:ssr:tcc-wiki-blockchain-front": "node dist/tcc-wiki-blockchain-front/server/server.mjs"
   },
   "private": true,
   "dependencies": {
