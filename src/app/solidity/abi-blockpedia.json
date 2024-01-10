@@ -1,0 +1,219 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_conteudo",
+				"type": "string"
+			}
+		],
+		"name": "adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_ativo",
+				"type": "bool"
+			}
+		],
+		"name": "ativaDesativaBlockpedia",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_indexPagina",
+				"type": "uint256"
+			}
+		],
+		"name": "ativaPaginaPorIndexPaginas",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_indexPagina",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_indexVersoes",
+				"type": "uint256"
+			}
+		],
+		"name": "ativaVersaoPorIndexVersoesEIndexPaginas",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_titulo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_conteudo",
+				"type": "string"
+			}
+		],
+		"name": "criarPagina",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_indexPagina",
+				"type": "uint256"
+			}
+		],
+		"name": "desativaPaginaPorIndexPaginas",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	},
+	{
+		"inputs": [],
+		"name": "ativo",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "autor",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "dataCriacao",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_indice",
+				"type": "uint256"
+			}
+		],
+		"name": "getConteudoVersaoValidaPorIndexPaginas",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_titulo",
+				"type": "string"
+			}
+		],
+		"name": "getPaginasPorTitulo",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "paginas",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "ativo",
+				"type": "bool"
+			},
+			{
+				"internalType": "address",
+				"name": "autor",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dataCriacao",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "titulo",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
