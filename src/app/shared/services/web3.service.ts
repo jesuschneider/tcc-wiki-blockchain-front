@@ -37,11 +37,6 @@ export class Web3Service {
           detail: 'Por favor, instale uma carteira Ethereum como a MetaMask para usar este aplicativo.',
       });
     }
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Erro',
-      detail: 'Por favor, instale uma carteira Ethereum como a MetaMask para usar este aplicativo.',
-  });
 
   }
 
