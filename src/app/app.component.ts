@@ -4,6 +4,8 @@ import { RouterOutlet } from '@angular/router';
 import { Web3Service } from './shared/services/web3.service';
 import { MessageService } from 'primeng/api';
 
+//verificar sccs do app (toast errado)
+//melhorar desconectar conectar a carteira
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,18 +26,18 @@ export class AppComponent implements OnInit {
 
   criarPagina() {
     if (!this.titulo || !this.conteudo) {
-      this.messageService.add({
-        severity: 'warning',
-        summary: 'Aviso',
-        detail: 'Necessario preencher o titulo e conteudo para continuar',
-      });
+      alert("Necessario preencher o titulo e conteudo para continuar")
       return;
     }
 
-    this.web3Service.enviarTransacao(() => 
-      this.web3Service.criarPagina(this.titulo, this.conteudo)
-    );
+    
+    this.web3Service.criarPagina(this.titulo, this.conteudo)
+    
   }
+
+  inicializarWeb3() {this.web3Service.inicializarWeb3();}
+
+  desconectarCarteira() {this.web3Service.desconectarCarteira();}
 
   
 }
