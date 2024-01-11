@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Web3Service } from './shared/services/web3.service';
 import { MessageService } from 'primeng/api';
+import { Pagina } from './shared/models/response/pagina.response';
 
 //verificar sccs do app (toast errado)
 //melhorar desconectar conectar a carteira
@@ -14,8 +15,13 @@ import { MessageService } from 'primeng/api';
 export class AppComponent implements OnInit {
   title = 'blockpedia';
 
-  titulo: string = '';
-  conteudo: string = '';
+  tituloCadastro: string = '';
+  conteudoCadastro: string = '';
+
+  indicePaginaPesquisa: number = 0;
+  conteudoAtivoPagina: string | null = null;
+
+  paginaSelecionada: Pagina | null = null;
 
   constructor(
     private web3Service: Web3Service,
@@ -24,20 +30,29 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  criarPagina() {
-    if (!this.titulo || !this.conteudo) {
-      alert("Necessario preencher o titulo e conteudo para continuar")
-      return;
-    }
+  criarPagina(){this.web3Service.criarPagina(this.tituloCadastro, this.conteudoCadastro).then(conteudo => {}).catch(error => {})}
 
-    
-    this.web3Service.criarPagina(this.titulo, this.conteudo)
-    
-  }
+  desativaBlockpedia(){this.web3Service.ativaDesativaBlockpedia(false).then(conteudo => {}).catch(error => {});}
+
+  ativaBlockpedia(){this.web3Service.ativaDesativaBlockpedia(true).then(conteudo => {}).catch(error => {});}
 
   inicializarWeb3() {this.web3Service.inicializarWeb3();}
 
   desconectarCarteira() {this.web3Service.desconectarCarteira();}
 
-  
+  /*
+  buscarConteudoPagina()
+  {
+    this.web3Service.getConteudoVersaoValidaPorIndexPaginas(this.indicePaginaPesquisa)
+      .then(conteudo => {
+        this.conteudoAtivoPagina = conteudo;
+      })
+      .catch(error => {
+        this.conteudoAtivoPagina = null;
+      });
+  }
+  */
+
+
+
 }

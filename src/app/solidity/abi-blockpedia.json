@@ -145,6 +145,297 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "getAllDadosBlockpedia",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "autor",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataCriacao",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "titulo",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "ativo",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "autor",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dataCriacao",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "conteudo",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Blockpedia.Versao[]",
+						"name": "versoes",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Blockpedia.Pagina[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllPaginasAtivas",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "autor",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataCriacao",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "titulo",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "ativo",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "autor",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dataCriacao",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "conteudo",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Blockpedia.Versao[]",
+						"name": "versoes",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Blockpedia.Pagina[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllPaginasAtivasSomenteComAsVersoesAtivas",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "autor",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataCriacao",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "titulo",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "ativo",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "autor",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dataCriacao",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "conteudo",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Blockpedia.Versao[]",
+						"name": "versoes",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Blockpedia.Pagina[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllPaginasComTodasVersoes",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "autor",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataCriacao",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "titulo",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "ativo",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "autor",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dataCriacao",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "conteudo",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Blockpedia.Versao[]",
+						"name": "versoes",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Blockpedia.Pagina[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getInformacoesBlockpedia",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -152,12 +443,61 @@
 				"type": "uint256"
 			}
 		],
-		"name": "getConteudoVersaoValidaPorIndexPaginas",
+		"name": "getPaginaComVersoes",
 		"outputs": [
 			{
-				"internalType": "string",
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "autor",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataCriacao",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "titulo",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "ativo",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "autor",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dataCriacao",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "conteudo",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Blockpedia.Versao[]",
+						"name": "versoes",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Blockpedia.Pagina",
 				"name": "",
-				"type": "string"
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -180,6 +520,96 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "autor",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataCriacao",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "titulo",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "bool",
+								"name": "ativo",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "autor",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "dataCriacao",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "conteudo",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Blockpedia.Versao[]",
+						"name": "versoes",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Blockpedia.Pagina",
+				"name": "_pagina",
+				"type": "tuple"
+			}
+		],
+		"name": "getVersaoValidaDeUmaPagina",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "ativo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "autor",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dataCriacao",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "conteudo",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Blockpedia.Versao",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
