@@ -51,56 +51,52 @@ export class Web3Service
 
   private async enviarTransacao(method: any): Promise<any>
   {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
     try{return await method.send({ from: this.conta });}
     catch (error){alert('Erro ao enviar transação: '+ error);throw error;}
   }
 
-  public async getAllDadosBlockpedia(): Promise<any>
+  private async metodoDeConsulta(metrod : string,...args: any[]): Promise<any>
   {
     if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+    try{return await this.contrato.methods[metrod](...args).call();}
+    catch (error){alert('Erro ao consultar: '+ error);throw error;}
+  }
 
-    return await this.contrato.methods.getAllDadosBlockpedia().call();
+  public async getAllDadosBlockpedia(): Promise<any>
+  {
+    return await this.metodoDeConsulta('getAllDadosBlockpedia');
   }
 
   public async getInformacoesBlockpedia(): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
-
-    return await this.contrato.methods.getInformacoesBlockpedia().call();
+    return await this.metodoDeConsulta('getInformacoesBlockpedia');
   }
 
   public async getAllPaginasComTodasVersoes(): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
-
-    return await this.contrato.methods.getAllPaginasComTodasVersoes().call();
+    return await this.metodoDeConsulta('getAllPaginasComTodasVersoes');
   }
 
   public async getAllPaginasAtivas(): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
-
-    return await this.contrato.methods.getAllPaginasAtivas().call();
+    return await this.metodoDeConsulta('getAllPaginasAtivas');
   }
 
   public async getAllPaginasAtivasSomenteComAsVersoesAtivas(): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
-
-    return await this.contrato.methods.getAllPaginasAtivasSomenteComAsVersoesAtivas().call();
+    return await this.metodoDeConsulta('getAllPaginasAtivasSomenteComAsVersoesAtivas');
   }
 
   public async getPaginaComVersoes(indice:number): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
     if (this.indiceValido(indice)){this.indiceErrado();return;}
     
-    return await this.contrato.methods.getPaginaComVersoes(indice).call();
+    return await this.metodoDeConsulta('getPaginaComVersoes',indice);
   }
 
   public async criarPagina(titulo: string, conteudo: string): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();return;}
     if (!titulo || (titulo.length == 0)){this.tituloErrado();return;}
     if (!conteudo || (conteudo.length == 0)){this.conteudoErrado();return;}
     
@@ -109,14 +105,11 @@ export class Web3Service
 
   public async ativaDesativaBlockpedia(ativo:boolean): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
-
     return await this.enviarTransacao(this.contrato.methods.ativaDesativaBlockpedia(ativo));
   }
 
   public async adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas(indice:number, conteudo: string): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
     if (this.indiceValido(indice)){this.indiceErrado();return;}
     if (!conteudo || (conteudo.length == 0)){this.conteudoErrado();return;}
 
@@ -125,7 +118,6 @@ export class Web3Service
 
   public async ativaVersaoPorIndexVersoesEIndexPaginas(indicePagina:number, indiceVersoes:number): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
     if (this.indiceValido(indicePagina)){this.indiceErrado();return;}
     if (this.indiceValido(indiceVersoes)){this.indiceErrado();return;}
     
@@ -134,7 +126,6 @@ export class Web3Service
 
   public async desativaPaginaPorIndexPaginas(indicePagina:number): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
     if (this.indiceValido(indicePagina)){this.indiceErrado();return;}
     
     return await this.enviarTransacao(this.contrato.methods.desativaPaginaPorIndexPaginas(indicePagina));
@@ -142,7 +133,6 @@ export class Web3Service
 
   public async ativaPaginaPorIndexPaginas(indicePagina:number): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
     if (this.indiceValido(indicePagina)){this.indiceErrado();return;}
     
     return await this.enviarTransacao(this.contrato.methods.ativaPaginaPorIndexPaginas(indicePagina));
@@ -150,7 +140,6 @@ export class Web3Service
 
   public async getPaginasPorTitulo(titulo: string): Promise<any>
   {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
     if (!titulo || (titulo.length == 0)){this.conteudoErrado();return;}
 
     return await this.enviarTransacao(this.contrato.methods.getPaginasPorTitulo(titulo));
