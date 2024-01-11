@@ -1,13 +1,20 @@
 <h1>ESTA FUNCIONANDO</h1>
 <div>
-    <input type="text" [(ngModel)]="tituloCadastro" placeholder="Título da Página">
-    <input type="text" [(ngModel)]="conteudoCadastro" placeholder="Conteúdo da Página">
-    <button (click)="criarPagina()">Criar Página</button>
+    <input type="number" [(ngModel)]="funcaoSelecionada" placeholder="funcaoSelecionada">
+    <input type="number" [(ngModel)]="indicePagina" placeholder="indicePagina">
+    <input type="number" [(ngModel)]="indiceVercao" placeholder="indiceVercao">
+    <input type="text" [(ngModel)]="tituloCadastro" placeholder="tituloCadastro">
+    <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
 </div>
-<button (click)="inicializarWeb3()">Conectar Carteira</button>
-<button (click)="desconectarCarteira()">Desconectar Carteira</button>
-<button (click)="desativaBlockpedia()">Desativa Blockpedia</button>
-<button (click)="ativaBlockpedia()">Ativa Blockpedia</button>
+<div>
+  <button (click)="ativafuncao()">ativafuncao</button>
+</div>
+
+
+
+
+
+
 <!--
 <div>
   <input type="number" [(ngModel)]="indicePaginaPesquisa" placeholder="Índice da Página">

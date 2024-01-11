@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import abiContratoBlockpedia from './../../solidity/abi-blockpedia.json';
+import abiContratoBlockpedia from './../../solidity/abi/abi-blockpedia.json';
 import Web3 from 'web3';
 
 declare let window: any;
-const enderecoContrato = '0x4cdbb9Fbf164D485b7DA461DcE92267529325Db5'
+const enderecoContrato = '0x4eAaFD9bBFf24a45d1ced2BD63f00629E8e0a060'
 
 
 @Injectable({
@@ -33,36 +33,6 @@ export class Web3Service
     } else {this.instalarCarteira()}
   }
 
-  private async enviarTransacao(method: any): Promise<any>
-  {
-    try{return await method.send({ from: this.conta });}
-    catch (error){alert('Erro ao enviar transação: '+ error);throw error;}
-  }
-
-  public async criarPagina(titulo: string, conteudo: string): Promise<any>
-  {
-    if (!this.conta){this.conectarACarteira();return;}
-    if (!titulo || (titulo.length == 0)){this.tituloErrado();return;}
-    if (!conteudo || (conteudo.length == 0)){this.conteudoErrado();return;}
-    
-    return await this.enviarTransacao(this.contrato.methods.criarPagina(titulo, conteudo));
-  }
-
-  public async getConteudoVersaoValidaPorIndexPaginas(indice: number): Promise<any>
-  {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
-    if (!indice ||(indice<0)){this.indiceErrado();return;}
-
-    return await this.contrato.methods.getConteudoVersaoValidaPorIndexPaginas(indice).call();
-  }
-
-  public async ativaDesativaBlockpedia(ativo:boolean): Promise<any>
-  {
-    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
-
-    return await this.enviarTransacao(this.contrato.methods.ativaDesativaBlockpedia(ativo));
-  }
-
   public desconectarCarteira(): void {this.conta = null;this.web3 = null}
 
   public aceitarCompartilhar(){alert("Usuário recusou compartilhar sua conta")}
@@ -76,4 +46,114 @@ export class Web3Service
   public instalarCarteira(){alert("Por favor, instale uma carteira Ethereum como a MetaMask para usar este aplicativo")}
 
   public conectarACarteira(){alert("Por favor, conectar a sua carteira")}
+
+  public indiceValido(indice:number){return (indice == null || indice == undefined || indice<0)}
+
+  private async enviarTransacao(method: any): Promise<any>
+  {
+    try{return await method.send({ from: this.conta });}
+    catch (error){alert('Erro ao enviar transação: '+ error);throw error;}
+  }
+
+  public async getAllDadosBlockpedia(): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+
+    return await this.contrato.methods.getAllDadosBlockpedia().call();
+  }
+
+  public async getInformacoesBlockpedia(): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+
+    return await this.contrato.methods.getInformacoesBlockpedia().call();
+  }
+
+  public async getAllPaginasComTodasVersoes(): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+
+    return await this.contrato.methods.getAllPaginasComTodasVersoes().call();
+  }
+
+  public async getAllPaginasAtivas(): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+
+    return await this.contrato.methods.getAllPaginasAtivas().call();
+  }
+
+  public async getAllPaginasAtivasSomenteComAsVersoesAtivas(): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+
+    return await this.contrato.methods.getAllPaginasAtivasSomenteComAsVersoesAtivas().call();
+  }
+
+  public async getPaginaComVersoes(indice:number): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+    if (this.indiceValido(indice)){this.indiceErrado();return;}
+    
+    return await this.contrato.methods.getPaginaComVersoes(indice).call();
+  }
+
+  public async criarPagina(titulo: string, conteudo: string): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();return;}
+    if (!titulo || (titulo.length == 0)){this.tituloErrado();return;}
+    if (!conteudo || (conteudo.length == 0)){this.conteudoErrado();return;}
+    
+    return await this.enviarTransacao(this.contrato.methods.criarPagina(titulo, conteudo));
+  }
+
+  public async ativaDesativaBlockpedia(ativo:boolean): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+
+    return await this.enviarTransacao(this.contrato.methods.ativaDesativaBlockpedia(ativo));
+  }
+
+  public async adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas(indice:number, conteudo: string): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+    if (this.indiceValido(indice)){this.indiceErrado();return;}
+    if (!conteudo || (conteudo.length == 0)){this.conteudoErrado();return;}
+
+    return await this.enviarTransacao(this.contrato.methods.adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas(indice,conteudo));
+  }
+
+  public async ativaVersaoPorIndexVersoesEIndexPaginas(indicePagina:number, indiceVersoes:number): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+    if (this.indiceValido(indicePagina)){this.indiceErrado();return;}
+    if (this.indiceValido(indiceVersoes)){this.indiceErrado();return;}
+    
+    return await this.enviarTransacao(this.contrato.methods.ativaVersaoPorIndexVersoesEIndexPaginas(indicePagina,indiceVersoes));
+  }
+
+  public async desativaPaginaPorIndexPaginas(indicePagina:number): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+    if (this.indiceValido(indicePagina)){this.indiceErrado();return;}
+    
+    return await this.enviarTransacao(this.contrato.methods.desativaPaginaPorIndexPaginas(indicePagina));
+  }
+
+  public async ativaPaginaPorIndexPaginas(indicePagina:number): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+    if (this.indiceValido(indicePagina)){this.indiceErrado();return;}
+    
+    return await this.enviarTransacao(this.contrato.methods.ativaPaginaPorIndexPaginas(indicePagina));
+  }
+
+  public async getPaginasPorTitulo(titulo: string): Promise<any>
+  {
+    if (!this.conta){this.conectarACarteira();throw new Error('Contrato não está inicializado');}
+    if (!titulo || (titulo.length == 0)){this.conteudoErrado();return;}
+
+    return await this.enviarTransacao(this.contrato.methods.getPaginasPorTitulo(titulo));
+  }
+
 }
