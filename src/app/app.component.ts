@@ -21,20 +21,16 @@ export class AppComponent implements OnInit {
   indiceVercao: number = 0;
   tituloCadastro: string = '';
   conteudoCadastro: string = '';
-  
 
   constructor(
     private web3Service: Web3Service,
     private messageService: MessageService,
     ) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   ativafuncao()
   {
-
     if(this.funcaoSelecionada==1)
       this.web3Service.getAllDadosBlockpedia().then(resposta => {console.log(resposta)}).catch(error => {})
     if(this.funcaoSelecionada==2)
@@ -64,32 +60,5 @@ export class AppComponent implements OnInit {
     if(this.funcaoSelecionada==14)
       this.web3Service.getPaginasPorTitulo(this.tituloCadastro).then(resposta => {console.log(resposta)}).catch(error => {})
   }
-
-  /*
-  criarPagina(){this.web3Service.criarPagina(this.tituloCadastro, this.conteudoCadastro).then(conteudo => {}).catch(error => {})}
-
-  desativaBlockpedia(){this.web3Service.ativaDesativaBlockpedia(false).then(conteudo => {}).catch(error => {});}
-
-  ativaBlockpedia(){this.web3Service.ativaDesativaBlockpedia(true).then(conteudo => {}).catch(error => {});}
-
-  inicializarWeb3() {this.web3Service.inicializarWeb3();}
-
-  desconectarCarteira() {this.web3Service.desconectarCarteira();}
-  */
-
-  /*
-  buscarConteudoPagina()
-  {
-    this.web3Service.getConteudoVersaoValidaPorIndexPaginas(this.indicePaginaPesquisa)
-      .then(conteudo => {
-        this.conteudoAtivoPagina = conteudo;
-      })
-      .catch(error => {
-        this.conteudoAtivoPagina = null;
-      });
-  }
-  */
-
-
 
 }
