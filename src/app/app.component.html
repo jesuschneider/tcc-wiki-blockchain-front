@@ -1,18 +1,15 @@
-<h1>ESTA FUNCIONANDO</h1>
+
 <div>
     <input type="number" [(ngModel)]="funcaoSelecionada" placeholder="funcaoSelecionada">
     <input type="number" [(ngModel)]="indicePagina" placeholder="indicePagina">
     <input type="number" [(ngModel)]="indiceVercao" placeholder="indiceVercao">
     <input type="text" [(ngModel)]="tituloCadastro" placeholder="tituloCadastro">
     <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
+    <button (click)="ativafuncao()">ativafuncao</button>
 </div>
-<div>
-  <button (click)="ativafuncao()">ativafuncao</button>
-</div>
-
 
 <pre>
-  {{dados | json}}
+  {{paginaSelecionada | json}}
 </pre>
 
 

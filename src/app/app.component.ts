@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { Web3Service } from './shared/services/web3.service';
 import { MessageService } from 'primeng/api';
 import { Pagina } from './shared/models/response/pagina.response';
+import { Blockpedia } from './shared/models/response/blockpedia.response';
 
 //verificar sccs do app (toast errado)
 //melhorar desconectar conectar a carteira
@@ -22,19 +23,26 @@ export class AppComponent implements OnInit {
   tituloCadastro: string = '';
   conteudoCadastro: string = '';
 
-  dados : any
+  public dados!: Blockpedia;
+  public paginaSelecionada!:Pagina;
 
   constructor(
     private web3Service: Web3Service,
     private messageService: MessageService,
     ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void 
+  {
+    this.web3Service.getAllDadosBlockpedia().then(resposta => 
+      {
+        console.log(resposta);
+        this.dados=resposta
+        this.paginaSelecionada=resposta.paginas[0]
+      }).catch(error => {console.log(error)})
+  }
 
   ativafuncao()
-  {
-    if(this.funcaoSelecionada==1)
-      this.web3Service.getAllDadosBlockpedia().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
+  {      
     if(this.funcaoSelecionada==2)
       this.web3Service.getInformacoesBlockpedia().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==3)

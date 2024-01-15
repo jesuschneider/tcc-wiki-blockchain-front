@@ -20,7 +20,10 @@ export class Web3Service
   constructor(
     private messageService: MessageService,
     private transformersService: TransformersService
-    ){this.inicializarWeb3();}
+    ){
+      this.web3 = new Web3(window.ethereum);
+      this.contrato = new this.web3.eth.Contract(abiContratoBlockpedia, enderecoContrato);
+    }
 
   private toast(severidade:string, titulo:string, mensagem:string)
   {
@@ -39,31 +42,28 @@ export class Web3Service
 
   public desconectarCarteira(): void {this.conta = null;this.web3 = null}
 
-  public async inicializarWeb3(): Promise<void>
+  public async validaConta(): Promise<void>
   {
     if(this.conta) return
     if(typeof window.ethereum !== 'undefined')
     {
-      this.web3 = new Web3(window.ethereum);
       try
       {
         let contas = await window.ethereum.request({ method: 'eth_requestAccounts' });
         this.conta = contas[0]
-        this.contrato = new this.web3.eth.Contract(abiContratoBlockpedia, enderecoContrato);
-      } catch (error) {this.toast('','','Usuario recusou compartilhar sua conta')}
-    } else {this.toast('','','Por favor, instale uma carteira Ethereum como a MetaMask para usar este aplicativo')}
+      } catch (error) {this.toast('','','Usuario recusou compartilhar sua conta');throw new Error('')}
+    } else {this.toast('','','Por favor, instale uma carteira Ethereum como a MetaMask para usar esta funcao deste aplicativo');throw new Error('')}
   }
 
   private async enviarTransacao(method: any): Promise<any>
   {
-    if (!this.conta){this.toast('','','Por favor, conectar a sua carteira');throw new Error('Sem permissao para acessar conta');}
+    if (!this.conta){await this.validaConta()}
     try{return await method.send({ from: this.conta });}
     catch (error){alert('Erro ao enviar transacao: '+ error);throw error;}
   }
 
   private async metodoDeConsulta(metrod : string,...args: any[]): Promise<any>
   {
-    if (!this.conta){this.toast('','','Por favor, conectar a sua carteira');throw new Error('Sem permissao para acessar conta');}
     try{return await this.contrato.methods[metrod](...args).call();}
     catch (error){alert('Erro ao consultar: '+ error);throw error;}
   }
