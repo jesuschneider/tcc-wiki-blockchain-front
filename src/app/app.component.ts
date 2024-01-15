@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { Web3Service } from './shared/services/web3.service';
-import { MessageService } from 'primeng/api';
 import { Pagina } from './shared/models/response/pagina.response';
 import { Blockpedia } from './shared/models/response/blockpedia.response';
+import { Versao } from './shared/models/response/versao.response';
+import { ToastService } from './shared/services/toast.service';
 
 //verificar sccs do app (toast errado)
-//melhorar desconectar conectar a carteira
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,20 +24,38 @@ export class AppComponent implements OnInit {
 
   public dados!: Blockpedia;
   public paginaSelecionada!:Pagina;
+  public versaoSelecionada!:Versao;
 
   constructor(
     private web3Service: Web3Service,
-    private messageService: MessageService,
+    private toastService: ToastService,
     ) {}
 
   ngOnInit(): void 
   {
+    this.carregaPaginaInicial();
+  }
+
+  carregaPaginaInicial()
+  {
     this.web3Service.getAllDadosBlockpedia().then(resposta => 
-      {
-        console.log(resposta);
-        this.dados=resposta
-        this.paginaSelecionada=resposta.paginas[0]
-      }).catch(error => {console.log(error)})
+    {
+      this.dados=resposta
+      this.paginaSelecionada=resposta.paginas[0]
+
+      this.versaoSelecionada = this.getVercaoAtiva(this.paginaSelecionada)
+
+
+    }).catch(error => {console.log(error)})
+  }
+
+  getVercaoAtiva(paginaSelecionada: Pagina):Versao {
+    for (let i = 0; i < this.paginaSelecionada.versoes.length; i++)
+    {
+      if(this.paginaSelecionada.versoes[i].ativo)return this.paginaSelecionada.versoes[i]
+    }
+    this.toastService.toastErro('Pagina nao contem versao valida');
+    throw Error('Pagina nao contem versao valida');
   }
 
   ativafuncao()
