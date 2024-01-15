@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   tituloCadastro: string = '';
   conteudoCadastro: string = '';
 
+  dados : any
+
   constructor(
     private web3Service: Web3Service,
     private messageService: MessageService,
@@ -32,33 +34,33 @@ export class AppComponent implements OnInit {
   ativafuncao()
   {
     if(this.funcaoSelecionada==1)
-      this.web3Service.getAllDadosBlockpedia().then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.getAllDadosBlockpedia().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==2)
-      this.web3Service.getInformacoesBlockpedia().then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.getInformacoesBlockpedia().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==3)
-      this.web3Service.getAllPaginasComTodasVersoes().then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.getAllPaginasComTodasVersoes().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==4)
-      this.web3Service.getAllPaginasAtivas().then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.getAllPaginasAtivas().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==5)
-      this.web3Service.getAllPaginasAtivasSomenteComAsVersoesAtivas().then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.getAllPaginasAtivasSomenteComAsVersoesAtivas().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==6)
-      this.web3Service.getPaginaComVersoes(this.indicePagina).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.getPaginaComVersoes(this.indicePagina).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==7)
-      this.web3Service.criarPagina(this.tituloCadastro,this.conteudoCadastro).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.criarPagina(this.tituloCadastro,this.conteudoCadastro).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==8)
-      this.web3Service.ativaDesativaBlockpedia(true).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.ativaDesativaBlockpedia(true).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==9)
-      this.web3Service.ativaDesativaBlockpedia(false).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.ativaDesativaBlockpedia(false).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==10)
-      this.web3Service.adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas(this.indicePagina,this.conteudoCadastro).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas(this.indicePagina,this.conteudoCadastro).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==11)
-      this.web3Service.ativaVersaoPorIndexVersoesEIndexPaginas(this.indicePagina,this.indiceVercao).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.ativaVersaoPorIndexVersoesEIndexPaginas(this.indicePagina,this.indiceVercao).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==12)
-      this.web3Service.desativaPaginaPorIndexPaginas(this.indicePagina).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.desativaPaginaPorIndexPaginas(this.indicePagina).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==13)
-      this.web3Service.ativaPaginaPorIndexPaginas(this.indicePagina).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.ativaPaginaPorIndexPaginas(this.indicePagina).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==14)
-      this.web3Service.getPaginasPorTitulo(this.tituloCadastro).then(resposta => {console.log(resposta)}).catch(error => {})
+      this.web3Service.getPaginasPorTitulo(this.tituloCadastro).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
   }
 
 }

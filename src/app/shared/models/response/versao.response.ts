@@ -2,6 +2,6 @@ export interface Versao
 {
     ativo:boolean;
     autor:string;
-    dataCriacao:number;
+    dataCriacao:Date;
     conteudo:string;
 }

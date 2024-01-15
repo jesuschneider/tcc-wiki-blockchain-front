@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import abiContratoBlockpedia from './../../solidity/abi/abi-blockpedia.json';
 import Web3 from 'web3';
+import { Blockpedia } from '../models/response/blockpedia.response';
+import { TransformersService } from './transformers.service';
 
 declare let window: any;
 const enderecoContrato = '0x4eAaFD9bBFf24a45d1ced2BD63f00629E8e0a060'
@@ -15,7 +17,10 @@ export class Web3Service
   private conta: any;
   private contrato: any;
 
-  constructor(private messageService: MessageService){this.inicializarWeb3();}
+  constructor(
+    private messageService: MessageService,
+    private transformersService: TransformersService
+    ){this.inicializarWeb3();}
 
   private toast(severidade:string, titulo:string, mensagem:string)
   {
@@ -63,9 +68,9 @@ export class Web3Service
     catch (error){alert('Erro ao consultar: '+ error);throw error;}
   }
 
-  public async getAllDadosBlockpedia(): Promise<any>
+  public async getAllDadosBlockpedia(): Promise<Blockpedia>
   {
-    return await this.metodoDeConsulta('getAllDadosBlockpedia');
+    return this.transformersService.transformarDadosRespostaEmBlockpedia(await this.metodoDeConsulta('getAllDadosBlockpedia'));
   }
 
   public async getInformacoesBlockpedia(): Promise<any>
