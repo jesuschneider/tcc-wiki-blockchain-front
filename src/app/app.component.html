@@ -1,3 +1,6 @@
+<pre>
+  {{paginaSelecionada | json}}
+</pre>
 
 <div>
     <input type="number" [(ngModel)]="funcaoSelecionada" placeholder="funcaoSelecionada">
@@ -8,11 +11,15 @@
     <button (click)="ativafuncao()">ativafuncao</button>
 </div>
 
-<h1>{{paginaSelecionada.titulo}}</h1>
+<div>
+  <h1>{{paginaSelecionada!.titulo}}</h1>
+  <span>{{versaoSelecionada!.conteudo}}</span>
+  <br><font size="1"> Pagina criada por {{paginaSelecionada!.autor}} em {{paginaSelecionada!.dataCriacao}}</font><br>
+  <font size="1"> Vercao criada por {{versaoSelecionada!.autor}} em {{versaoSelecionada!.dataCriacao}}</font>
+</div>
 
-<pre>
-  {{paginaSelecionada | json}}
-</pre>
+
+
 
 
 

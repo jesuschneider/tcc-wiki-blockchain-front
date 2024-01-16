@@ -7,4 +7,5 @@ export interface Pagina
     dataCriacao:Date;
     titulo:string;
     versoes:Versao[];
+    indicePaginas:number;
 }

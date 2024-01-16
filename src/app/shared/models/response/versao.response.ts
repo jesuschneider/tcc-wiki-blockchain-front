@@ -4,4 +4,5 @@ export interface Versao
     autor:string;
     dataCriacao:Date;
     conteudo:string;
+    indiceVersoes:number;
 }

@@ -5,7 +5,30 @@ import { Blockpedia } from './shared/models/response/blockpedia.response';
 import { Versao } from './shared/models/response/versao.response';
 import { ToastService } from './shared/services/toast.service';
 
+//MELHORIA
+//talvez fazer um jeito de saber que usuario ativou a vercao valida para facilitar rastreabilidade
+//melhorar apresentacao do app
+
+//CORRIGIR
 //verificar sccs do app (toast errado)
+//arrumar erro do carregamento do titulo no browser
+//fazer uma busca pagina para n carrega toda blockpedia
+
+//ADICIONAR
+//adicionar botão para editar pagina atual(adicionar nova vercao)
+//adicionar botão para desativar pagina atual
+//adicionar campo para buscar paginas por titulo e ao clicar selecionar ela(colocar o titulo, vercao etc)
+//adicionar botão para adicionar nova pagina
+//TALVEZ ADICIONAR
+//adicionar botão para desativar blockpedia
+//melhoria para verificar de titulo existe antes de adicionar pagina,
+//melhoria para bater input de indice com tamanho total das paginas/vercoes
+//melhoria fazer busca de paginas/vercoes tbm trazer o indice pela junto
+
+//adicionar aba com todas as vercoes da pagina
+//dentro dessa pagina tem o botão de ativar vercao
+//
+
 
 @Component({
   selector: 'app-root',
@@ -23,6 +46,7 @@ export class AppComponent implements OnInit {
   conteudoCadastro: string = '';
 
   public dados!: Blockpedia;
+
   public paginaSelecionada!:Pagina;
   public versaoSelecionada!:Versao;
 
@@ -42,10 +66,7 @@ export class AppComponent implements OnInit {
     {
       this.dados=resposta
       this.paginaSelecionada=resposta.paginas[0]
-
       this.versaoSelecionada = this.getVercaoAtiva(this.paginaSelecionada)
-
-
     }).catch(error => {console.log(error)})
   }
 
@@ -86,6 +107,27 @@ export class AppComponent implements OnInit {
       this.web3Service.ativaPaginaPorIndexPaginas(this.indicePagina).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
     if(this.funcaoSelecionada==14)
       this.web3Service.getPaginasPorTitulo(this.tituloCadastro).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
+  }
+
+  padTwoDigits(num: number) {
+    return num.toString().padStart(2, "0");
+  }
+  
+  dateInYyyyMmDdHhMmSs(date: Date, dateDiveder: string = "-") {
+    
+    return (
+      [
+        date.getFullYear(),
+        this.padTwoDigits(date.getMonth() + 1),
+        this.padTwoDigits(date.getDate()),
+      ].join(dateDiveder) +
+      " " +
+      [
+        this.padTwoDigits(date.getHours()),
+        this.padTwoDigits(date.getMinutes()),
+        this.padTwoDigits(date.getSeconds()),
+      ].join(":")
+    );
   }
 
 }
