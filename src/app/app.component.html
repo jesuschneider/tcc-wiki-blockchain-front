@@ -1,7 +1,7 @@
 <pre>
   {{paginaSelecionada | json}}
 </pre>
-
+<!--
 <div>
     <input type="number" [(ngModel)]="funcaoSelecionada" placeholder="funcaoSelecionada">
     <input type="number" [(ngModel)]="indicePagina" placeholder="indicePagina">
@@ -10,29 +10,39 @@
     <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
     <button (click)="ativafuncao()">ativafuncao</button>
 </div>
-
-<div>
-  <h1>{{paginaSelecionada!.titulo}}</h1>
-  <span>{{versaoSelecionada!.conteudo}}</span>
-  <br><font size="1"> Pagina criada por {{paginaSelecionada!.autor}} em {{paginaSelecionada!.dataCriacao}}</font><br>
-  <font size="1"> Vercao criada por {{versaoSelecionada!.autor}} em {{versaoSelecionada!.dataCriacao}}</font>
-</div>
-
-
-
-
-
-
-
-
-<!--
-<div>
-  <input type="number" [(ngModel)]="indicePaginaPesquisa" placeholder="Índice da Página">
-  <button (click)="buscarConteudoPagina()">Buscar Conteúdo da Página</button>
-  <div *ngIf="conteudoAtivoPagina">
-    <p>Conteúdo da Página:</p>
-    <p>{{ conteudoAtivoPagina }}</p>
-  </div>
-</div>
 -->
+
+<div>
+
+  <div>
+
+    <div *ngIf="paginaSelecionada">
+      <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
+      <button (click)="adicionaNovaVercaoDesativadaAPaginaSelecionada()">Adicionar nova vercao</button>
+    </div>
+
+    <div *ngIf="paginaSelecionada">
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="paginaSelecionada.ativo" (change)="alteraAtivoDesativaPagina()">
+        <span class="slider round"></span>
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <div>
+
+    <h1>{{paginaSelecionada!.titulo}}</h1>
+    <span>{{versaoSelecionada!.conteudo}}</span>
+    <br>
+      <font size="1"> Pagina criada por {{paginaSelecionada!.autor}} em {{paginaSelecionada!.dataCriacao}}</font>
+    <br>
+      <font size="1"> Vercao criada por {{versaoSelecionada!.autor}} em {{versaoSelecionada!.dataCriacao}}</font>
+
+  </div>
+
+</div>
+
 <p-toast></p-toast>

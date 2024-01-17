@@ -5,6 +5,7 @@ import { Blockpedia } from '../models/response/blockpedia.response';
 import { TransformersService } from './transformers.service';
 import { InputValidator } from '../util/inputValidator.service';
 import { ToastService } from './toast.service';
+import { Pagina } from '../models/response/pagina.response';
 
 declare let window: any;
 const enderecoContrato = '0x4eAaFD9bBFf24a45d1ced2BD63f00629E8e0a060'
@@ -80,11 +81,11 @@ export class Web3Service
     return await this.metodoDeConsulta('getAllPaginasAtivasSomenteComAsVersoesAtivas');
   }
 
-  public async getPaginaComVersoes(indice:number): Promise<any>
+  public async getPaginaComVersoes(indice:number): Promise<Pagina>
   {
     if (this.inputValidator.indiceInvalido(indice)){this.toastService.toastErro('Indice da pagina incorreto')}
     
-    return await this.metodoDeConsulta('getPaginaComVersoes',indice);
+    return this.transformersService.transformarDadosRespostaEmPaginas(await this.metodoDeConsulta('getPaginaComVersoes',indice),indice);
   }
 
   public async criarPagina(titulo: string, conteudo: string): Promise<any>
