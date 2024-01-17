@@ -1,48 +1,14 @@
-<pre>
-  {{paginaSelecionada | json}}
-</pre>
-<!--
 <div>
     <input type="number" [(ngModel)]="funcaoSelecionada" placeholder="funcaoSelecionada">
     <input type="number" [(ngModel)]="indicePagina" placeholder="indicePagina">
     <input type="number" [(ngModel)]="indiceVercao" placeholder="indiceVercao">
     <input type="text" [(ngModel)]="tituloCadastro" placeholder="tituloCadastro">
     <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
-    <button (click)="ativafuncao()">ativafuncao</button>
+    <button (click)="ativafuncao(this.funcaoSelecionada)">Ativar função</button>
 </div>
--->
 
-<div>
-
-  <div>
-
-    <div *ngIf="paginaSelecionada">
-      <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
-      <button (click)="adicionaNovaVercaoDesativadaAPaginaSelecionada()">Adicionar nova vercao</button>
-    </div>
-
-    <div *ngIf="paginaSelecionada">
-      <label class="switch">
-        <input type="checkbox" [(ngModel)]="paginaSelecionada.ativo" (change)="alteraAtivoDesativaPagina()">
-        <span class="slider round"></span>
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <div>
-
-    <h1>{{paginaSelecionada!.titulo}}</h1>
-    <span>{{versaoSelecionada!.conteudo}}</span>
-    <br>
-      <font size="1"> Pagina criada por {{paginaSelecionada!.autor}} em {{paginaSelecionada!.dataCriacao}}</font>
-    <br>
-      <font size="1"> Vercao criada por {{versaoSelecionada!.autor}} em {{versaoSelecionada!.dataCriacao}}</font>
-
-  </div>
-
-</div>
+<pre>
+  {{dados | json}}
+</pre>
 
 <p-toast></p-toast>

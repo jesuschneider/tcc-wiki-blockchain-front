@@ -4,6 +4,6 @@ export interface Blockpedia
 {
     ativo:boolean;
     autor:string;
-    dataCriacao:Date;
+    dataCriacao:any;
     paginas:Pagina[];
 }

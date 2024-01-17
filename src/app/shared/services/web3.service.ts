@@ -81,7 +81,7 @@ export class Web3Service
     return await this.metodoDeConsulta('getAllPaginasAtivasSomenteComAsVersoesAtivas');
   }
 
-  public async getPaginaComVersoes(indice:number): Promise<Pagina>
+  public async getPaginaComVersoes(indice:number): Promise<any>
   {
     if (this.inputValidator.indiceInvalido(indice)){this.toastService.toastErro('Indice da pagina incorreto')}
     

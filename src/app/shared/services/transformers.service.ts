@@ -44,8 +44,8 @@ import { Versao } from "../models/response/versao.response";
             autor: resposta["1"],
             dataCriacao: this.transformaTimesTampUnixParaDate(resposta["2"]),
             titulo: resposta["3"],
-            versoes: [],
             indicePaginas: indicePaginas,
+            versoes: [],
         };
 
         let vercoes = resposta["4"]
@@ -73,14 +73,36 @@ import { Versao } from "../models/response/versao.response";
         return versao;
     }
 
-    public transformaTimesTampUnixParaDate(timestamp: any):Date
+    public transformaTimesTampUnixParaDate(timestamp: any)
     {
-        return new Date(this.transformaDadoEmNumber(timestamp) * 1000);
+        return this.dateInYyyyMmDdHhMmSs(new Date(this.transformaDadoEmNumber(timestamp) * 1000));
     }
 
     public transformaDadoEmNumber(dado: any):number
     {
         return Number(dado);
     }
+
+    padTwoDigits(num: number)
+    {
+        return num.toString().padStart(2, "0");
+    }
+      
+    dateInYyyyMmDdHhMmSs(date: Date, dateDiveder: string = "-")
+    {
+        return (
+          [
+            date.getFullYear(),
+            this.padTwoDigits(date.getMonth() + 1),
+            this.padTwoDigits(date.getDate()),
+          ].join(dateDiveder) +
+          " " +
+          [
+            this.padTwoDigits(date.getHours()),
+            this.padTwoDigits(date.getMinutes()),
+            this.padTwoDigits(date.getSeconds()),
+          ].join(":")
+        );
+      }
 
   }
