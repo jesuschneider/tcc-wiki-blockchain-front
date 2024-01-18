@@ -1,10 +1,24 @@
 <div>
-    <input type="number" [(ngModel)]="funcaoSelecionada" placeholder="funcaoSelecionada">
-    <input type="number" [(ngModel)]="indicePagina" placeholder="indicePagina">
-    <input type="number" [(ngModel)]="indiceVercao" placeholder="indiceVercao">
-    <input type="text" [(ngModel)]="tituloCadastro" placeholder="tituloCadastro">
-    <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
-    <button (click)="ativafuncao(this.funcaoSelecionada)">Ativar função</button>
+    <table>
+      <tr>
+        <td>Acao selecionada</td>
+        <td>Indice selecionado</td>
+        <td>Indice versao</td>
+        <td>Titulo cadastro</td>
+        <td>Conteudo cadastro</td>
+        <td>Acão</td>
+      </tr>
+      <tr>
+        <td><input type="number" [(ngModel)]="funcaoSelecionada"></td>
+        <td><input type="number" [(ngModel)]="indicePagina"></td>
+        <td><input type="number" [(ngModel)]="indiceVercao"></td>
+        <td><input type="text" [(ngModel)]="tituloCadastro"></td>
+        <td><input type="text" [(ngModel)]="conteudoCadastro"></td>
+        <td><button (click)="ativafuncao(this.funcaoSelecionada)">Ativar função</button></td>
+      </tr>
+    </table> 
+
+  
 </div>
 
 <pre>

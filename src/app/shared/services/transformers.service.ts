@@ -103,6 +103,23 @@ import { Versao } from "../models/response/versao.response";
             this.padTwoDigits(date.getSeconds()),
           ].join(":")
         );
-      }
+    }
+    
+    removerChavesNaoNumericas(objeto: any)
+    {
+        let objetoModificado: any = structuredClone(objeto)
+        this.removerChaves(objetoModificado);
+        return objetoModificado;
+    }
+
+    removerChaves(obj: any)
+    {
+        Object.keys(obj).forEach(chave =>{
+            if (isNaN(parseInt(chave, 10))) 
+                delete obj[chave];
+            else if (typeof obj[chave] === 'object' && obj[chave] !== null)
+                this.removerChaves(obj[chave])
+        });
+    }
 
   }

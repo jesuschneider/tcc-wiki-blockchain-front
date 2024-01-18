@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Web3Service } from './shared/services/web3.service';
-import { Pagina } from './shared/models/response/pagina.response';
-import { Blockpedia } from './shared/models/response/blockpedia.response';
-import { Versao } from './shared/models/response/versao.response';
-import { ToastService } from './shared/services/toast.service';
-
 
 //MELHORIA
 //talvez fazer um jeito de saber que usuario ativou a vercao valida para facilitar rastreabilidade
