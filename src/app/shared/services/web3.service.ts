@@ -42,13 +42,13 @@ export class Web3Service
   private async enviarTransacao(method: any): Promise<any>
   {
     if (!this.conta){await this.validaConta()}
-    try{return this.transformersService.removerChavesNaoNumericas(await method.send({ from: this.conta }))}
+    try{return this.transformersService.addIndexToNestedObjects(this.transformersService.removerChavesNaoNumericas(await method.send({ from: this.conta })))}
     catch (error){this.toastService.toastErro('Erro ao enviar transacao: '+ error)}
   }
 
   private async metodoDeConsulta(metrod : string,...args: any[]): Promise<any>
   {
-    try{return this.transformersService.removerChavesNaoNumericas(await this.contrato.methods[metrod](...args).call())}
+    try{return this.transformersService.addIndexToNestedObjects(this.transformersService.removerChavesNaoNumericas(await this.contrato.methods[metrod](...args).call()))}
     catch (error){this.toastService.toastErro('Erro ao consultar: '+ error)}
   }
 
