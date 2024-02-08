@@ -14,7 +14,7 @@
         <td><input type="number" [(ngModel)]="indiceVercao"></td>
         <td><input type="text" [(ngModel)]="tituloCadastro"></td>
         <td><input type="text" [(ngModel)]="conteudoCadastro"></td>
-        <td><button (click)="ativafuncao(this.funcaoSelecionada)">Ativar funcao</button></td>
+        <td><button (click)="ativafuncao(this.funcaoSelecionada)">Ativa funcao</button></td>
       </tr>
     </table> 
 
@@ -119,88 +119,86 @@
 
       <tr>
         <td>1</td>
-        <td></td>
+        <td>Retorna os dados: ativo da blockpedia, endereco da entidade que realizou deploy do contrato, data do deploy do contrato, todas as paginas</td>
         <td>Buscar todos os dados da Blockpedia</td>
       </tr>
 
       <tr>
         <td>2</td>
-        <td></td>
+        <td>Retorna os dados: ativo da blockpedia, endereco da entidade que realizou deploy do contrato, data do deploy do contrato, quantidade de paginas da blockpedia</td>
         <td>Obter informações gerais da Blockpedia</td>
       </tr>
 
       <tr>
         <td>3</td>
-        <td></td>
-        <td>Listar todas as páginas com todas as suas versões</td>
+        <td>Retorna um array contendo todas as paginas da blockepdia</td>
+        <td>Lista todas as paginas com todas as suas versoes</td>
       </tr>
       
       <tr>
         <td>4</td>
-        <td></td>
-        <td>Listar todas as páginas ativas</td>
+        <td>Retorna um array contendo todas as paginas ativas da blockepdia</td>
+        <td>Lista todas as paginas ativas com todas as suas versoes</td>
       </tr>
       
       <tr>
         <td>5</td>
-        <td></td>
-        <td>Listar todas as páginas ativas com apenas as versões ativas</td>
+        <td>Retorna um array contendo todas as paginas ativas e somente a sua vercao ativa da blockepdia</td>
+        <td>Lista todas as paginas ativas com apenas as versoes ativas</td>
       </tr>
-      
       
       <tr>
         <td>6</td>
-        <td></td>
-        <td>Obter uma página específica com todas as suas versões, usando o índice da página</td>
+        <td>Retorna uma pagina pelo indice da pagina no array de paginas da blockepdia</td>
+        <td>Obtem uma pagina específica com todas as suas versões, usando o índice da página</td>
       </tr>
-      
       
       <tr>
         <td>7</td>
-        <td></td>
-        <td>Criar uma nova página na Blockpedia</td>
+        <td>Nao retorna dados</td>
+        <td>Criar uma nova pagina na Blockpedia</td>
       </tr>
-      
       
       <tr>
         <td>8</td>
-        <td></td>
-        <td>Ativar ou desativar a Blockpedia (ativar se true, desativar se false)</td>
+        <td>Nao retorna dados</td>
+        <td>Ativa a Blockpedia</td>
       </tr>
-      
-      
+
       <tr>
         <td>9</td>
-        <td></td>
-        <td>Adicionar uma nova versão desativada a uma página existente</td>
+        <td>Nao retorna dados</td>
+        <td>Desativa a Blockpedia</td>
       </tr>
-      
       
       <tr>
         <td>10</td>
-        <td></td>
-        <td>Ativar uma versão específica de uma página</td>
+        <td>Nao retorna dados</td>
+        <td>Adiciona uma nova versao desativada a uma pagina existente utilizando o indice paginas</td>
       </tr>
-      
       
       <tr>
         <td>11</td>
-        <td></td>
-        <td>Desativar uma página específica</td>
+        <td>Nao retorna dados</td>
+        <td>Ativa uma versao especifica de uma pagina, utilizando o indice paginas e o indice da versao da pagina</td>
       </tr>
-      
       
       <tr>
         <td>12</td>
-        <td></td>
-        <td>Ativar uma página específica</td>
+        <td>Nao retorna dados</td>
+        <td>Desativa uma pagina especifica pelo indice paginas</td>
       </tr>
       
+      <tr>
+        <td>12</td>
+        <td>Nao retorna dados</td>
+        <td>Ativa uma pagina especifica pelo indice paginas</td>
+      </tr>
       
       <tr>
         <td>13</td>
-        <td></td>
-        <td>Buscar páginas pelo título</td>
+        <td>Retorna um array contendo o indice de cada pagina que tem o titulo fornecido</td>
+        <td>Busca paginas pelo titulo</td>
       </tr>
       
     </table> 
