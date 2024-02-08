@@ -122,31 +122,24 @@ import { Versao } from "../models/response/versao.response";
         });
     }
 
-    addIndexToNestedObjects(obj: any): any {
-        if (!this.isObject(obj)) return obj;
-    
-        return this.processObject(obj);
-    }
-    
-    isObject(item: any): boolean {
-        return typeof item === 'object' && item !== null;
-    }
-    
-    processObject(obj: any): any {
-        const newObj: { [key: string]: any } = {};
-    
-        for (const key in obj) {
-            newObj[key] = Array.isArray(obj[key]) ? this.processArray(obj[key]) : obj[key];
+    addIndexToNestedObjects(obj: any, indice:number = -1): any {
+        if (!(typeof obj === 'object' && obj !== null)) return obj;
+
+        if(Array.isArray(obj)) 
+        {
+            for (let index = 0; index < obj.length; index++) 
+            {
+                obj[index] = this.addIndexToNestedObjects(obj[index], index);
+            }
         }
-    
-        return newObj;
-    }
-    
-    processArray(arr: any[]): any[] {
-        return arr.map((item, index) => {
-            const newItem = this.isObject(item) ? this.processObject(item) : item;
-            return { indice: index, ...newItem };
-        });
+        else if(typeof obj === 'object')
+        {
+            if(indice !== -1) obj['indice'] = indice
+            for (const key in obj) {
+                obj[key] = this.addIndexToNestedObjects(obj[key]);
+            }
+        }
+        return obj
     }
 
   }
