@@ -40,11 +40,17 @@ export class AppComponent implements OnInit {
   tituloCadastro: string = '';
   conteudoCadastro: string = '';
 
+  showTable = true;
+
   public dados: any;
 
   constructor(private web3Service: Web3Service) {}
 
   ngOnInit(): void {this.ativafuncao()}
+
+  show(){
+    this.showTable = !this.showTable;
+  }
 
   ativafuncao(funcaoSelecionadaParametro:any=1)
   {      

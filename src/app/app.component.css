@@ -65,3 +65,10 @@
   table, th, td {
     border: 1px solid black;
   }
+
+  .row{
+    display: flex;
+    flex-direction: row;
+      padding-top: 5px;
+      gap: 0.3rem;
+  }
