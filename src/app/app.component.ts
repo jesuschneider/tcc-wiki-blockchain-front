@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Web3Service } from './shared/services/web3.service';
-import { Pagina } from './shared/models/response/pagina.response';
-import { Blockpedia } from './shared/models/response/blockpedia.response';
-import { Versao } from './shared/models/response/versao.response';
-import { ToastService } from './shared/services/toast.service';
-
 
 //MELHORIA
 //talvez fazer um jeito de saber que usuario ativou a vercao valida para facilitar rastreabilidade
@@ -45,103 +40,55 @@ export class AppComponent implements OnInit {
   tituloCadastro: string = '';
   conteudoCadastro: string = '';
 
-  public dados!: Blockpedia;
+  showTable = true;
 
-  public paginaSelecionada!:Pagina;
-  public versaoSelecionada!:Versao;
+  public dados: any;
 
-  constructor(
-    private web3Service: Web3Service,
-    private toastService: ToastService,
-    ) {}
+  constructor(private web3Service: Web3Service) {}
 
-  ngOnInit(): void 
-  {
-    this.carregaPaginaInicial();
+  ngOnInit(): void {this.ativafuncao()}
+
+  show(){
+    this.showTable = !this.showTable;
   }
 
-  carregaPaginaInicial()
-  {
-    this.web3Service.getAllDadosBlockpedia().then(resposta => 
-    {
-      this.dados=resposta
-      this.setPaginaEVersao(resposta.paginas[0])
-    }).catch(error => {console.log(error)})
-  }
-
-  getVercaoAtiva(pagina: Pagina):Versao {
-    for (let i = 0; i < pagina.versoes.length; i++)
-    {
-      if(pagina.versoes[i].ativo)return pagina.versoes[i]
-    }
-    this.toastService.toastErro('Pagina nao contem versao valida');
-    throw Error('Pagina nao contem versao valida');
-  }
-
-  adicionaNovaVercaoDesativadaAPaginaSelecionada()
-  {
-    this.web3Service.adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas(
-      this.paginaSelecionada.indicePaginas,
-      this.conteudoCadastro)
-      .then(resposta => {this.recarregaPaginaAtual()})
-      .catch(error => {})
-  }
-
-  recarregaPaginaAtual(){this.carregaPaginaPorIndexPaginas(this.paginaSelecionada.indicePaginas)}
-
-  carregaPaginaPorIndexPaginas(indice:number)
-  {
-    this.web3Service.getPaginaComVersoes(indice)
-    .then(resposta => {this.setPaginaEVersao(resposta)})
-    .catch(error => {})
-  }
-
-  setPaginaEVersao(pagicaCompleta:Pagina)
-  {
-    this.paginaSelecionada = structuredClone(pagicaCompleta)
-    this.versaoSelecionada = this.getVercaoAtiva(this.paginaSelecionada)
-  }
-
-  alteraAtivoDesativaPagina()
-  {
-    if(this.paginaSelecionada.ativo)
-      this.web3Service.ativaPaginaPorIndexPaginas(this.paginaSelecionada.indicePaginas)
-        .then(resposta => {this.recarregaPaginaAtual()})
-        .catch(error => {})
-    if(!this.paginaSelecionada.ativo)
-      this.web3Service.desativaPaginaPorIndexPaginas(this.paginaSelecionada.indicePaginas)
-        .then(resposta => {this.recarregaPaginaAtual()})
-        .catch(error => {})
-  }
-
-
-
-  ativafuncao(numeroFuncao:number=0)
+  ativafuncao(funcaoSelecionadaParametro:any=1)
   {      
-    if(numeroFuncao==2)
+    if(funcaoSelecionadaParametro!=null && funcaoSelecionadaParametro!=null && funcaoSelecionadaParametro>0)
+      this.funcaoSelecionada=funcaoSelecionadaParametro
+
+    if(this.funcaoSelecionada===1)
+      this.web3Service.getAllDadosBlockpedia().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})  
+    if(this.funcaoSelecionada===2)
       this.web3Service.getInformacoesBlockpedia().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==3)
+    if(this.funcaoSelecionada===3)
       this.web3Service.getAllPaginasComTodasVersoes().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==4)
+    if(this.funcaoSelecionada===4)
       this.web3Service.getAllPaginasAtivas().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==5)
+    if(this.funcaoSelecionada===5)
       this.web3Service.getAllPaginasAtivasSomenteComAsVersoesAtivas().then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==7)
+    if(this.funcaoSelecionada===6)
+      this.web3Service.getPaginaComVersoes(this.indicePagina).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {}) 
+    if(this.funcaoSelecionada===7)
       this.web3Service.criarPagina(this.tituloCadastro,this.conteudoCadastro).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==8)
+    if(this.funcaoSelecionada===8)
       this.web3Service.ativaDesativaBlockpedia(true).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==9)
+    if(this.funcaoSelecionada===9)
       this.web3Service.ativaDesativaBlockpedia(false).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==10)
+    if(this.funcaoSelecionada===10)
       this.web3Service.adicionaNovaVercaoDesativadaAPaginaPorIndexPaginas(this.indicePagina,this.conteudoCadastro).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==11)
+    if(this.funcaoSelecionada===11)
       this.web3Service.ativaVersaoPorIndexVersoesEIndexPaginas(this.indicePagina,this.indiceVercao).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==12)
+    if(this.funcaoSelecionada===12)
       this.web3Service.desativaPaginaPorIndexPaginas(this.indicePagina).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==13)
+    if(this.funcaoSelecionada===13)
       this.web3Service.ativaPaginaPorIndexPaginas(this.indicePagina).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
-    if(numeroFuncao==14)
+    if(this.funcaoSelecionada===14)
       this.web3Service.getPaginasPorTitulo(this.tituloCadastro).then(resposta => {console.log(resposta);this.dados=resposta}).catch(error => {})
   }
 
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Unreachable code error
+BigInt.prototype.toJSON = function() { return this.toString() }

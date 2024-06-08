@@ -18,7 +18,7 @@ import { InputValidator } from "../util/inputValidator.service";
         severidade = 'error'
   
       if(this.inputValidator.stringVazia(titulo))
-        titulo = 'error'
+        titulo = 'Erro'
   
       this.messageService.add({ severity: severidade, summary: titulo, detail: mensagem });
       if(erro) throw Error(mensagem)

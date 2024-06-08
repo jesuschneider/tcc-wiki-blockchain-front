@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import abiContratoBlockpedia from './../../solidity/abi/abi-blockpedia.json';
 import Web3 from 'web3';
-import { Blockpedia } from '../models/response/blockpedia.response';
 import { TransformersService } from './transformers.service';
 import { InputValidator } from '../util/inputValidator.service';
 import { ToastService } from './toast.service';
-import { Pagina } from '../models/response/pagina.response';
 
 declare let window: any;
-const enderecoContrato = '0x4eAaFD9bBFf24a45d1ced2BD63f00629E8e0a060'
+const enderecoContrato = '0xD4aEB44610351500FCb748e644dbc25aCC52B27E'
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +26,6 @@ export class Web3Service
       this.contrato = new this.web3.eth.Contract(abiContratoBlockpedia, enderecoContrato);
     }
 
-  public desconectarCarteira(): void {this.conta = null;this.web3 = null}
-
   public async validaConta(): Promise<void>
   {
     if(this.conta) return
@@ -46,19 +42,19 @@ export class Web3Service
   private async enviarTransacao(method: any): Promise<any>
   {
     if (!this.conta){await this.validaConta()}
-    try{return await method.send({ from: this.conta });}
+    try{return this.transformersService.addIndexToNestedObjects(this.transformersService.removerChavesNaoNumericas(await method.send({ from: this.conta })))}
     catch (error){this.toastService.toastErro('Erro ao enviar transacao: '+ error)}
   }
 
   private async metodoDeConsulta(metrod : string,...args: any[]): Promise<any>
   {
-    try{return await this.contrato.methods[metrod](...args).call();}
+    try{return this.transformersService.addIndexToNestedObjects(this.transformersService.removerChavesNaoNumericas(await this.contrato.methods[metrod](...args).call()))}
     catch (error){this.toastService.toastErro('Erro ao consultar: '+ error)}
   }
 
-  public async getAllDadosBlockpedia(): Promise<Blockpedia>
+  public async getAllDadosBlockpedia(): Promise<any>
   {
-    return this.transformersService.transformarDadosRespostaEmBlockpedia(await this.metodoDeConsulta('getAllDadosBlockpedia'));
+    return await this.metodoDeConsulta('getAllDadosBlockpedia');
   }
 
   public async getInformacoesBlockpedia(): Promise<any>
@@ -81,11 +77,11 @@ export class Web3Service
     return await this.metodoDeConsulta('getAllPaginasAtivasSomenteComAsVersoesAtivas');
   }
 
-  public async getPaginaComVersoes(indice:number): Promise<Pagina>
+  public async getPaginaComVersoes(indice:number): Promise<any>
   {
     if (this.inputValidator.indiceInvalido(indice)){this.toastService.toastErro('Indice da pagina incorreto')}
     
-    return this.transformersService.transformarDadosRespostaEmPaginas(await this.metodoDeConsulta('getPaginaComVersoes',indice),indice);
+    return await this.metodoDeConsulta('getPaginaComVersoes',indice);
   }
 
   public async criarPagina(titulo: string, conteudo: string): Promise<any>

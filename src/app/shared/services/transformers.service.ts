@@ -44,8 +44,8 @@ import { Versao } from "../models/response/versao.response";
             autor: resposta["1"],
             dataCriacao: this.transformaTimesTampUnixParaDate(resposta["2"]),
             titulo: resposta["3"],
-            versoes: [],
             indicePaginas: indicePaginas,
+            versoes: [],
         };
 
         let vercoes = resposta["4"]
@@ -73,14 +73,73 @@ import { Versao } from "../models/response/versao.response";
         return versao;
     }
 
-    public transformaTimesTampUnixParaDate(timestamp: any):Date
+    public transformaTimesTampUnixParaDate(timestamp: any)
     {
-        return new Date(this.transformaDadoEmNumber(timestamp) * 1000);
+        return this.dateInYyyyMmDdHhMmSs(new Date(this.transformaDadoEmNumber(timestamp) * 1000));
     }
 
     public transformaDadoEmNumber(dado: any):number
     {
         return Number(dado);
+    }
+
+    padTwoDigits(num: number)
+    {
+        return num.toString().padStart(2, "0");
+    }
+      
+    dateInYyyyMmDdHhMmSs(date: Date, dateDiveder: string = "-")
+    {
+        return (
+          [
+            date.getFullYear(),
+            this.padTwoDigits(date.getMonth() + 1),
+            this.padTwoDigits(date.getDate()),
+          ].join(dateDiveder) +
+          " " +
+          [
+            this.padTwoDigits(date.getHours()),
+            this.padTwoDigits(date.getMinutes()),
+            this.padTwoDigits(date.getSeconds()),
+          ].join(":")
+        );
+    }
+    
+    removerChavesNaoNumericas(objeto: any)
+    {
+        let objetoModificado: any = structuredClone(objeto)
+        this.removerChaves(objetoModificado);
+        return objetoModificado;
+    }
+
+    removerChaves(obj: any)
+    {
+        Object.keys(obj).forEach(chave =>{
+            if (isNaN(parseInt(chave, 10))) 
+                delete obj[chave];
+            else if (typeof obj[chave] === 'object' && obj[chave] !== null)
+                this.removerChaves(obj[chave])
+        });
+    }
+
+    addIndexToNestedObjects(obj: any, indice:number = -1): any {
+        if (!(typeof obj === 'object' && obj !== null)) return obj;
+
+        if(Array.isArray(obj)) 
+        {
+            for (let index = 0; index < obj.length; index++) 
+            {
+                obj[index] = this.addIndexToNestedObjects(obj[index], index);
+            }
+        }
+        else if(typeof obj === 'object')
+        {
+            if(indice !== -1) obj['indice'] = indice
+            for (const key in obj) {
+                obj[key] = this.addIndexToNestedObjects(obj[key]);
+            }
+        }
+        return obj
     }
 
   }

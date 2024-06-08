@@ -2,7 +2,7 @@ export interface Versao
 {
     ativo:boolean;
     autor:string;
-    dataCriacao:Date;
+    dataCriacao:any;
     conteudo:string;
     indiceVersoes:number;
 }

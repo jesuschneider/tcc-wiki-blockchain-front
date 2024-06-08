@@ -1,46 +1,238 @@
-<pre>
-  {{paginaSelecionada | json}}
-</pre>
-<!--
 <div>
-    <input type="number" [(ngModel)]="funcaoSelecionada" placeholder="funcaoSelecionada">
-    <input type="number" [(ngModel)]="indicePagina" placeholder="indicePagina">
-    <input type="number" [(ngModel)]="indiceVercao" placeholder="indiceVercao">
-    <input type="text" [(ngModel)]="tituloCadastro" placeholder="tituloCadastro">
-    <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
-    <button (click)="ativafuncao()">ativafuncao</button>
-</div>
--->
-
-<div>
-
-  <div>
-
-    <div *ngIf="paginaSelecionada">
-      <input type="text" [(ngModel)]="conteudoCadastro" placeholder="conteudoCadastro">
-      <button (click)="adicionaNovaVercaoDesativadaAPaginaSelecionada()">Adicionar nova vercao</button>
+    <div>
+      <table>
+        <tr>
+          <td>Acao selecionada</td>
+          <td>Indice pagina</td>
+          <td>Indice versao</td>
+          <td>Titulo</td>
+          <td>Conteudo</td>
+          <td>Acao</td>
+        </tr>
+        <tr>
+          <td><input type="number" [(ngModel)]="funcaoSelecionada"></td>
+          <td><input type="number" [(ngModel)]="indicePagina"></td>
+          <td><input type="number" [(ngModel)]="indiceVercao"></td>
+          <td><input type="text" [(ngModel)]="tituloCadastro"></td>
+          <td><input type="text" [(ngModel)]="conteudoCadastro"></td>
+          <td>
+            <button (click)="ativafuncao(this.funcaoSelecionada)">Ativa funcao</button>
+            <button (click)="show()">Glossario</button>
+          </td>
+        </tr>
+      </table>
     </div>
 
-    <div *ngIf="paginaSelecionada">
-      <label class="switch">
-        <input type="checkbox" [(ngModel)]="paginaSelecionada.ativo" (change)="alteraAtivoDesativaPagina()">
-        <span class="slider round"></span>
-      </label>
+    <div class="row" *ngIf="showTable">
+      
+    <table>
+      <tr>
+        <td>Objeto</td>
+        <td>Atributos</td>
+      </tr>
 
-    </div>
+      <tr>
+        <td>Pagina</td>
+        <td>
+          <table>
+            <tr>
+              <td>Indice do atributo</td>
+              <td>Nome do atributo</td>
+              <td>Tipo do atributo</td>
+              <td>Descricao do atributo</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>ativo</td>
+              <td>booleano</td>
+              <td>usado para verificar se a pagina esta ativa</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>autor</td>
+              <td>string</td>
+              <td>endereco do usuario que criou a pagina</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>data de criacao</td>
+              <td>numero</td>
+              <td>data de criacao da pagina no formato timestamp unix</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>titulo</td>
+              <td>string</td>
+              <td>titulo da pagina</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>vercoes</td>
+              <td>array</td>
+              <td>array contendo objetos do tipo Versao</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
 
+      <tr>
+        <td>Versao</td>
+        <td>
+          <table>
+            <tr>
+              <td>Indice do atributo</td>
+              <td>Nome do atributo</td>
+              <td>Tipo do atributo</td>
+              <td>Descricao do atributo</td>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>ativo</td>
+              <td>booleano</td>
+              <td>usado para verificar se a versao esta ativa</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>autor</td>
+              <td>string</td>
+              <td>endereco do usuario que criou a versao</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>data de criacao</td>
+              <td>numero</td>
+              <td>data de criacao da versao no formato timestamp unix</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>conteudo</td>
+              <td>string</td>
+              <td>conteudo da vercao</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table> 
+    
+    <table>
+      <tr>
+        <td>Numero da acao</td>
+        <td>Descricao da acao</td>
+        <td>Parametro</td>
+        <td>Retorno da acao</td>
+      </tr>
+
+      <tr>
+        <td>1</td>
+        <td>Buscar todos os dados da Blockpedia</td>
+        <td>Sem parametro</td>
+        <td>Retorna os dados: ativo da blockpedia, endereco da entidade que realizou deploy do contrato, data do deploy do contrato, todas as paginas</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>Obter informacoes gerais da Blockpedia</td>
+        <td>Sem parametro</td>
+        <td>Retorna os dados: ativo da blockpedia, endereco da entidade que realizou deploy do contrato, data do deploy do contrato, quantidade de paginas da blockpedia</td>
+      </tr>
+
+      <tr>
+        <td>3</td>
+        <td>Lista todas as paginas com todas as suas versoes</td>
+        <td>Sem parametro</td>
+        <td>Retorna um array contendo todas as paginas da blockepdia</td>
+      </tr>
+      
+      <tr>
+        <td>4</td>
+        <td>Lista todas as paginas ativas com todas as suas versoes</td>
+        <td>Sem parametro</td>
+        <td>Retorna um array contendo todas as paginas ativas da blockepdia</td>
+      </tr>
+      
+      <tr>
+        <td>5</td>
+        <td>Lista todas as paginas ativas com apenas as versoes ativas</td>
+        <td>Sem parametro</td>
+        <td>Retorna um array contendo todas as paginas ativas e somente a sua vercao ativa da blockepdia</td>
+      </tr>
+      
+      <tr>
+        <td>6</td>
+        <td>Obtem uma pagina especifica com todas as suas versões</td>
+        <td>Indice selecionado</td>
+        <td>Retorna uma pagina pelo indice da pagina no array de paginas da blockepdia</td>
+      </tr>
+      
+      <tr>
+        <td>7</td>
+        <td>Criar uma nova pagina na Blockpedia</td>
+        <td>Titulo cadastro, conteudo</td>
+        <td>Nao retorna dados</td>
+      </tr>
+      
+      <tr>
+        <td>8</td>
+        <td>Ativa a Blockpedia</td>
+        <td>Sem parametro</td>
+        <td>Nao retorna dados</td>
+      </tr>
+
+      <tr>
+        <td>9</td>
+        <td>Desativa a Blockpedia</td>
+        <td>Sem parametro</td>
+        <td>Nao retorna dados</td>
+      </tr>
+      
+      <tr>
+        <td>10</td>
+        <td>Adiciona uma nova versao desativada a uma pagina existente</td>
+        <td>Indice pagina, conteudo</td>
+        <td>Nao retorna dados</td>
+      </tr>
+      
+      <tr>
+        <td>11</td>
+        <td>Ativa uma versao especifica de uma pagina</td>
+        <td>Indice pagina, indice vercao</td>
+        <td>Nao retorna dados</td>
+      </tr>
+      
+      <tr>
+        <td>12</td>
+        <td>Desativa uma pagina especifica</td>
+        <td>Indice pagina</td>
+        <td>Nao retorna dados</td>
+      </tr>
+      
+      <tr>
+        <td>13</td>
+        <td>Ativa uma pagina especifica</td>
+        <td>Indice pagina</td>
+        <td>Nao retorna dados</td>
+      </tr>
+      
+      <tr>
+        <td>14</td>
+        <td>Busca paginas pelo titulo</td>
+        <td>Titulo</td>
+        <td>Retorna um array contendo o indice de cada pagina que tem o titulo fornecido</td>
+      </tr>
+      
+    </table> 
+    
   </div>
 
-
-  <div>
-
-    <h1>{{paginaSelecionada!.titulo}}</h1>
-    <span>{{versaoSelecionada!.conteudo}}</span>
-    <br>
-      <font size="1"> Pagina criada por {{paginaSelecionada!.autor}} em {{paginaSelecionada!.dataCriacao}}</font>
-    <br>
-      <font size="1"> Vercao criada por {{versaoSelecionada!.autor}} em {{versaoSelecionada!.dataCriacao}}</font>
-
+  <div class="row">
+    <table>
+      <tr>
+        <td>Retorno</td>
+      </tr>
+      <tr>
+        <td><pre>{{dados | json}}</pre></td>
+      </tr>
+    </table>
   </div>
 
 </div>

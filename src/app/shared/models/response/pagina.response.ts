@@ -4,7 +4,7 @@ export interface Pagina
 {
     ativo:boolean;
     autor:string;
-    dataCriacao:Date;
+    dataCriacao:any;
     titulo:string;
     versoes:Versao[];
     indicePaginas:number;
